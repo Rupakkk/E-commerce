@@ -121,8 +121,9 @@
                                         </ul>
                                     </div>
                                     <div id="reviews" class="container tab-pane fade">
+                                    {% for review in reviews %}
                                         <div class="reviews-submitted">
-                                            <div class="reviewer">Phasellus Gravida - <span>01 Jan 2020</span></div>
+                                            <div class="reviewer">{{review.username}}<span>{{review.date}}</span></div>
                                             <div class="ratting">
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
@@ -131,9 +132,11 @@
                                                 <i class="fa fa-star"></i>
                                             </div>
                                             <p>
-                                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.
+                                                {{review.review}}
                                             </p>
                                         </div>
+                                    {% endfor %}
+                                        {% if user.is_authenticated %}
                                         <div class="reviews-submit">
                                             <h4>Give your Review:</h4>
                                             <div class="ratting">
@@ -143,21 +146,24 @@
                                                 <i class="far fa-star"></i>
                                                 <i class="far fa-star"></i>
                                             </div>
+                                            <form method="POST">
                                             <div class="row form">
                                                 <div class="col-sm-6">
-                                                    <input type="text" placeholder="Name">
+                                                    <input name='username' type="text" placeholder="Name">
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <input type="email" placeholder="Email">
+                                                    <input name='email' type="email" placeholder="Email">
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <textarea placeholder="Review"></textarea>
+                                                    <textarea name='review' placeholder="Review"></textarea>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <button>Submit</button>
+                                                    <button type="submit" >Submit</button>
                                                 </div>
                                             </div>
+                                            </form>
                                         </div>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
@@ -465,12 +471,14 @@
         <div class="brand">
             <div class="container-fluid">
                 <div class="brand-slider">
-                    <div class="brand-item"><img src="img/brand-1.png" alt=""></div>
-                    <div class="brand-item"><img src="img/brand-2.png" alt=""></div>
+                {% for brand in brands %}
+                    <div class="brand-item"><img src="{{brand.iamge.url}}" alt=""></div>
+                    {% comment %} <div class="brand-item"><img src="img/brand-2.png" alt=""></div>
                     <div class="brand-item"><img src="img/brand-3.png" alt=""></div>
                     <div class="brand-item"><img src="img/brand-4.png" alt=""></div>
-                    <div class="brand-item"><img src="img/brand-5.png" alt=""></div>
-                    <div class="brand-item"><img src="img/brand-6.png" alt=""></div>
+                    <div class="brand-item"><img src="img/brand-5.png" alt=""></div> 
+                    <div class="brand-item"><img src="img/brand-6.png" alt=""></div> {% endcomment %}
+                {% endfor %}
                 </div>
             </div>
         </div>

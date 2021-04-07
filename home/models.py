@@ -64,10 +64,10 @@ class Item(models.Model):
     label=models.CharField(choices=LABEL, max_length=200)
     image=models.ImageField(upload_to='media')
     status=models.CharField(choices=STATUS,max_length=200)
-    slug=models.CharField(max_length=200,unique=True)
+    slug=models.CharField(max_length=200,unique=True) 
     category=models.ForeignKey("Category",on_delete=models.CASCADE)
     brand=models.ForeignKey("Brand",on_delete=models.CASCADE,null=True)
-    description=models.TextField(blank=True)
+    description=models.TextField(blank=True) 
     specification=models.TextField(blank=True)
     
     def __str__(self):
@@ -85,8 +85,28 @@ class Feedback(models.Model):
 
     def __str__(self):
         return self.name
-    
 
+
+class Contact(models.Model):
+    name=models.CharField(max_length=300)
+    email=models.EmailField(max_length=254,blank=True)
+    subject=models.TextField(blank=True)
+    message=models.TextField()
+
+    def __str__(self):
+        return self.name
+    
+    
+class Review(models.Model):
+    username=models.CharField( max_length=250,blank=True)
+    date=models.DateField(auto_now_add=True)
+    email=models.EmailField(max_length=254,blank=True)
+    review=models.TextField(blank=True)
+    rating=models.IntegerField()
+    status=models.CharField(choices=STATUS,max_length=200,default=None)
+
+    def __str__(self):
+        return self.username
     
         
         
